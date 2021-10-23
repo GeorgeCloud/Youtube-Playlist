@@ -1,10 +1,14 @@
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return 'main page'
+    return render_template('index.html', playlist_name='our')
+
+
+# User model
+# Playlist model
 
 
 if __name__ == '__main__':
