@@ -1,0 +1,18 @@
+{% extends '_base.html' %}
+
+{% block header %}
+  <title>View</title>
+{% endblock %}
+
+{% block body %}
+  <h1 style="text-align: center;">
+    Playlists
+  </h1>
+
+  {% for playlist in playlists %}
+    <h2>{{ playlist['title'] }}</h2>
+    <p>{{ playlist['description'] }}</p>
+  {% else %}
+    <h2>There are currently no playlists</h2>
+  {% endfor %}
+{% endblock %}
