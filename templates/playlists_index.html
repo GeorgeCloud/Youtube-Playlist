@@ -9,10 +9,19 @@
     Playlists
   </h1>
 
-  {% for playlist in playlists %}
-    <h2>{{ playlist['title'] }}</h2>
-    <p>{{ playlist['description'] }}</p>
-  {% else %}
-    <h2>There are currently no playlists</h2>
-  {% endfor %}
+  <div class="container">
+    <a href="playlists/new">Create new playlist</a>
+      {% for playlist in playlists %}
+      <div class="playlist-container">
+        <span><b>Title:</b> {{ playlist['title'] }}</span>
+        <span><b>Desc:</b> {{ playlist['description'] }}</span>
+        <a href="https://www.youtube.com/watch?v={{ playlist['id'] }}">Visit</a>
+      </div>
+      {% else %}
+        <h2>There are currently no playlists</h2>
+      {% endfor %}
+  </div>
+
+
+
 {% endblock %}

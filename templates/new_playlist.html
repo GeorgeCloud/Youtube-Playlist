@@ -1,10 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends '_base.html' %}
+
+{% block header %}
+  <title>New Playlist</title>
+{% endblock %}
+
+{% block body %}
+  <h1 style="text-align: center;">New Playlist</h1>
+
+  <form action="/playlists" method="POST" class="container">
+    <fieldset class="col-view">
+      <input type="text" placeholder="Playlist Title" name="playlist-title">
+      <input type="text" placeholder="Playlist Description" name="playlist-description">
+      <input type="text" placeholder="Video ID" name="playlist-video-id">
+      <br>
+      <input type="submit" value="Save Playlist">
+    </fieldset>
+  </form>
+{% endblock %}
