@@ -1,5 +1,6 @@
 body {
-
+    background-color: rgb(24, 24, 24);
+    color: white;
 }
 
 div {
@@ -12,6 +13,10 @@ h1, h2, h3, h4, h5, h6 {
 
 p {
 
+}
+
+a {
+    color: white;
 }
 
 form {
@@ -39,6 +44,28 @@ img {
 
 }
 
+.above-and-under {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 5px;
+    align-items: center;
+}
+
+.side-by-side {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.space-around {
+    justify-content: space-between;
+}
+
+.justify-left {
+    align-content: flex-start;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -47,6 +74,7 @@ img {
 
 .playlist-container {
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
     border: solid 1px;
     padding: 20px;

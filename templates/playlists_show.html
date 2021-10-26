@@ -1,0 +1,31 @@
+{% extends '_base.html' %}
+
+{% block header %}
+  <title>{{ playlist['title'] }}</title>
+{% endblock %}
+
+{% block body %}
+  <div class="side-by-side">
+    <div>
+      <img src="https://i.ytimg.com/vi/{{playlist['video_ids'][0]}}/sddefault.jpg"
+        alt="Playlist Thumbnail"
+        height="200"
+      width="300">
+
+      <h1>{{ playlist['title'] }}</h1>
+
+      <h2 class="">Description</h2>
+      <p>{{ playlist['description'] }}</p>
+    </div>
+
+    <div class="above-and-under justify-left">
+      {% for video_url in playlist['videos'] %}
+        <iframe
+          width="250"
+          height="200"
+          src="{{ video_url }}">
+        </iframe>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

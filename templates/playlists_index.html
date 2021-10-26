@@ -5,17 +5,21 @@
 {% endblock %}
 
 {% block body %}
-  <h1 style="text-align: center;">
-    Playlists
-  </h1>
-
   <div class="container">
+    <h1 style="text-align: center;">Playlists</h1>
+
     <a href="playlists/new">Create new playlist</a>
       {% for playlist in playlists %}
       <div class="playlist-container">
-        <span><b>Title:</b> {{ playlist['title'] }}</span>
-        <span><b>Desc:</b> {{ playlist['description'] }}</span>
-        <a href="https://www.youtube.com/watch?v={{ playlist['id'] }}">Visit</a>
+        <div class="above-and-under">
+          <span><b>Title:</b> {{ playlist.title }}</span>
+          <span><b>Desc:</b> {{ playlist.description }}</span>
+        </div>
+        <div class="side-by-side">
+          <a href="playlists/{{ playlist._id }}">View</a>
+          <a href="playlists/edit/{{ playlist._id }}">Edit</a>
+          <a href="playlists/delete/{{ playlist._id }}">Delete</a>
+        </div>
       </div>
       {% else %}
         <h2>There are currently no playlists</h2>

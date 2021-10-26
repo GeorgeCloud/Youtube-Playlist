@@ -5,13 +5,12 @@
 {% endblock %}
 
 {% block body %}
-  <h1 style="text-align: center;">New Playlist</h1>
-
   <form action="/playlists" method="POST" class="container">
     <fieldset class="col-view">
-      <input type="text" placeholder="Playlist Title" name="playlist-title">
-      <input type="text" placeholder="Playlist Description" name="playlist-description">
-      <input type="text" placeholder="Video ID" name="playlist-video-id">
+      <legend>New Playlist</legend>
+      <input type="text" placeholder="Title" name="title">
+      <input type="text" placeholder="Description" name="description">
+      <input type="text" placeholder="Video ID" name="video_ids">
       <br>
       <input type="submit" value="Save Playlist">
     </fieldset>
