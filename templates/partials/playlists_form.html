@@ -1,0 +1,8 @@
+<fieldset class="col-view">
+  <legend>New Playlist</legend>
+  <input type="text" placeholder="{{ playlist.title if playlist else 'Title' }}" name="title">
+  <input type="text" value="" placeholder="{{ playlist.description if playlist else 'Description' }}" name="description">
+  <textarea rows="10" value="" placeholder="{{ ' '.join(playlist.video_ids) if playlist else 'Video IDs' }}" name="video_ids"></textarea>
+  <br>
+  <input type="submit" value="Save Playlist">
+</fieldset>

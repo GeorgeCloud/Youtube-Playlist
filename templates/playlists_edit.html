@@ -1,11 +1,11 @@
 {% extends '_base.html' %}
 
 {% block header %}
-  <title>New Playlist</title>
+  <title>Edit Playlist</title>
 {% endblock %}
 
 {% block body %}
-  <form action="/playlists" method="POST" class="container">
+  <form action="/playlists/{{playlist['_id']}}" method="POST" class="container">
     {% include 'partials/playlists_form.html' %}
   </form>
 {% endblock %}
