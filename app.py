@@ -27,24 +27,24 @@ def playlists_index():
 
 @app.route('/playlists/new', methods=['GET'])
 def playlist_new():
-    return render_template('new_playlist.html', playlist='')
+    return render_template('new_playlist.html', playlist='', title="New Playlist")
 
 @app.route('/playlists', methods=['POST'])
 def playlist_submit():
     playlist_document = create_playlist_document(request.form)
 
     playlists.insert_one(playlist_document)
-    return redirect(url_for('playlist_show', playlist_id=str(playlist_document['_id'])))
+    return redirect(url_for('playlist_show', playlist_id=playlist_document['_id']))
 
 @app.route('/playlists/<playlist_id>', methods=['GET'])
 def playlist_show(playlist_id):
     playlist = playlists.find_one({'_id': ObjectId(playlist_id)})
     return render_template('playlists_show.html', playlist=playlist)
 
-@app.route('/playlists/edit/<playlist_id>', methods=['GET'])
+@app.route('/playlists/<playlist_id>/edit', methods=['GET'])
 def playlist_edit(playlist_id):
     playlist = playlists.find_one({'_id': ObjectId(playlist_id)})
-    return render_template('playlists_edit.html', playlist=playlist)
+    return render_template('playlists_edit.html', playlist=playlist, title="Edit Playlist")
 
 @app.route('/playlists/<playlist_id>', methods=['POST'])
 def playlist_update(playlist_id):
@@ -57,7 +57,7 @@ def playlist_update(playlist_id):
 
     return redirect(url_for('playlist_show', playlist_id=playlist_id))
 
-@app.route('/playlists/delete/<playlist_id>')
+@app.route('/playlists/<playlist_id>/delete')
 def playlist_delete(playlist_id):
     playlists.delete_one({'_id': ObjectId(playlist_id)})
     return redirect(url_for('playlists_index'))
