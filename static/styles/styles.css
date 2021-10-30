@@ -1,3 +1,5 @@
+/* General Styling */
+
 body {
     background-color: rgb(24, 24, 24);
     color: white;
@@ -20,20 +22,27 @@ a {
 }
 
 form {
-
 }
 
 input {
-
 }
 
 input[type=text] {
-    width: 25%;
+    width: 15vw;
     margin-bottom: 20px;
+}
+
+input[type=number] {
+    width: 2.5rem;
 }
 
 input[type=submit] {
 
+}
+
+textarea {
+    width: 15vw;
+    height: 13vh;
 }
 
 button {
@@ -43,6 +52,8 @@ button {
 img {
 
 }
+
+/* Views Styling */
 
 .above-and-under {
     display: flex;
@@ -58,6 +69,25 @@ img {
     justify-content: space-around;
 }
 
+.rate-box {
+    margin-top: 1rem;
+    margin-left: 13.5%;
+}
+
+.rating-input {
+    width: 20%;
+}
+
+.rating-stars {
+    display: flex;
+    align-self: flex-end;
+}
+
+.star {
+    height: 20px;
+    width: 20px;
+}
+
 .space-around {
     justify-content: space-between;
 }
@@ -70,16 +100,22 @@ img {
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 80vh;
 }
 
-.playlist-container {
+.playlist-card {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     border: solid 1px;
     padding: 20px;
-    width: 20%;
+    width: 25%;
+    height: 20%;
     margin-top: 20px;
+}
+
+.playlist-content {
+    margin: 10px 0;
 }
 
 .col-view {
@@ -88,4 +124,8 @@ img {
     align-items: center;
     width: 50%;
     padding: 20px;
+}
+
+.video {
+    margin-top: 10px;
 }

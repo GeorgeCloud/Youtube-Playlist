@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, url_for, redirect
+from flask_paginate import Pagination, get_page_parameter
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 from datetime import datetime
@@ -8,6 +9,8 @@ client = MongoClient()
 db = client.Playlister
 playlists = db.playlists
 
+PLAYLISTS_PER_PAGE = 1
+
 def video_url_creator(id_lst):
     return [f'https://youtube.com/embed/{id}' for id in id_lst]
 
@@ -16,14 +19,19 @@ def create_playlist_document(request_data):
     return {
         'title': request.form['title'],
         'description': request.form['description'],
+        'rating': int(request.form['rating']),
         'videos': video_url_creator(video_ids),
-        'video_ids': video_ids
+        'video_ids': video_ids,
+        'views': 1,
+        'last_modified': datetime.now(),
     }
 
 @app.route('/', methods=['GET'])
 def playlists_index():
-    # TODO: return -head 10 > find()
-    return render_template('playlists_index.html', playlists=playlists.find())
+    page = request.args.get(get_page_parameter(), type=int, default=1)
+    pagination = Pagination(page=page, total=playlists.count_documents({}), search=False, record_name='playlists')
+
+    return render_template('playlists_index.html', playlists=playlists.find(), pagination=pagination)  # paginate
 
 @app.route('/playlists/new', methods=['GET'])
 def playlist_new():
@@ -33,12 +41,15 @@ def playlist_new():
 def playlist_submit():
     playlist_document = create_playlist_document(request.form)
 
-    playlists.insert_one(playlist_document)
-    return redirect(url_for('playlist_show', playlist_id=playlist_document['_id']))
+    playlist_id = playlists.insert_one(playlist_document).inserted_id
+    return redirect(url_for('playlist_show', playlist_id=playlist_id))
 
 @app.route('/playlists/<playlist_id>', methods=['GET'])
 def playlist_show(playlist_id):
-    playlist = playlists.find_one({'_id': ObjectId(playlist_id)})
+    playlist = playlists.find_one_and_update(
+        {'_id': ObjectId(playlist_id)},
+        {'$inc': {'views': 1}}
+    )
     return render_template('playlists_show.html', playlist=playlist)
 
 @app.route('/playlists/<playlist_id>/edit', methods=['GET'])

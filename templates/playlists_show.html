@@ -5,7 +5,6 @@
 {% endblock %}
 
 {% block body %}
-  <a href="/">&lt; Home</a>
   <div class="side-by-side">
     <div>
       <img src="https://i.ytimg.com/vi/{{playlist['video_ids'][0]}}/sddefault.jpg"
@@ -13,15 +12,28 @@
         height="200"
       width="300">
 
-      <h1>{{ playlist['title'] }}</h1>
+        <div class="rating-stars">
+        {% for rating in range(playlist.rating) %}
+          <img class="star" src="{{ url_for('static', filename='images/star.png') }}" alt="Star Rating">
+        {% endfor %}
+        </div>
 
-      <h2 class="">Description</h2>
-      <p>{{ playlist['description'] }}</p>
+      <div>
+        <h1>{{ playlist['title'] }}</h1>
+
+        <p>{{ playlist['description'] }}</p>
+        <hr>
+        <p>{{ playlist['videos']|length }} {{'videos' if playlist['videos']|length > 1 else 'video'}},
+          {{ playlist['views'] }} {{'views' if playlist['views'] > 1 else 'view'}}</p>
+
+        <p>Last updated on {{ playlist['last_modified'].strftime("%b %d, %Y") }}</p>
+      </div>
     </div>
 
     <div class="above-and-under justify-left">
       {% for video_url in playlist['videos'] %}
         <iframe
+          class="video"
           width="250"
           height="200"
           src="{{ video_url }}">

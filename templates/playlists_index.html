@@ -10,8 +10,14 @@
 
     <a href="playlists/new">Create new playlist</a>
       {% for playlist in playlists %}
-      <div class="playlist-container">
-        <div class="above-and-under">
+      <div class="playlist-card">
+        <div class="rating-stars">
+          {% for rating in range(playlist.rating) %}
+            <img class="star" src="{{ url_for('static', filename='images/star.png') }}" alt="Star Rating">
+          {% endfor %}
+        </div>
+
+        <div class="above-and-under playlist-content">
           <span><b>Title:</b> {{ playlist.title }}</span>
           <span><b>Desc:</b> {{ playlist.description }}</span>
         </div>
@@ -24,8 +30,8 @@
       {% else %}
         <h2>There are currently no playlists</h2>
       {% endfor %}
+      {{ pagination.info }}
+      {{ pagination.links }}
   </div>
-
-
 
 {% endblock %}

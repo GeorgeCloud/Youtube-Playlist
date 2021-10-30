@@ -1,8 +1,19 @@
 <fieldset class="col-view">
   <legend>{{title}}</legend>
-  <input type="text" placeholder="{{ playlist.title if playlist else 'Title' }}" name="title">
-  <input type="text" value="" placeholder="{{ playlist.description if playlist else 'Description' }}" name="description">
-  <textarea rows="10" value="" placeholder="{{ ' '.join(playlist.video_ids) if playlist else 'Video IDs' }}" name="video_ids"></textarea>
+
+  <label class="left-center">Title</label>
+  <input type="text" placeholder="{{ playlist.title if playlist else '' }}" name="title" required>
+
+  <label class="left-center">Description</label>
+  <input type="text" value="{{ playlist.description }}" placeholder="{{ playlist.description if playlist else '' }}" name="description" required>
+
+  <label class="left-center">YouTube Video ID</label>
+  <textarea id="IdsTextArea" rows="10" placeholder="{{ ' '.join(playlist.video_ids) if playlist else 'Video IDs' }}" name="video_ids" required></textarea>
+
+  <div class="rate-box left-center">
+    <span>Star Rating: </span><input class="rating-input" type="number" value="{{playlist.rating if playlist else 1}}" min="1" max="5" name="rating">
+  </div>
+
   <br>
   <input type="submit" value="Save Playlist">
 </fieldset>

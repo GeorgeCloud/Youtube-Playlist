@@ -17,7 +17,7 @@ sample_playlist = {
 sample_form_data = {
     'title': sample_playlist['title'],
     'description': sample_playlist['description'],
-    'videos_ids': ' '.join(sample_playlist['video_ids'])
+    'video_ids': ' '.join(sample_playlist['video_ids'])
 }
 
 class PlaylistsTests(TestCase):
@@ -65,13 +65,13 @@ class PlaylistsTests(TestCase):
         page_content = result.get_data(as_text=True)
         self.assertIn('Diablo', page_content)
 
-    # Does not pass an _id when creating an item in DB
-    # @mock.patch('pymongo.collection.Collection.insert_one')
-    # def test_submit_playlist(self, mock_insert):
-    #     result = self.client.post('/playlists', data=sample_form_data)
-    #
-    #     self.assertEqual(result.status, '302 FOUND')
-    #     mock_insert.assert_called_with(sample_playlist)
+    # # Does not pass an _id when creating an item in DB
+    @mock.patch('pymongo.collection.Collection.insert_one')
+    def test_submit_playlist(self, mock_insert):
+        result = self.client.post('/playlists', data=sample_form_data)
+
+        mock_insert.assert_called_with(sample_playlist)
+        self.assertEqual(result.status, '302 FOUND')
 
     # @mock.patch('pymongo.collection.Collection.update_one')
     # def test_update_playlist(self, mock_update):
@@ -80,12 +80,12 @@ class PlaylistsTests(TestCase):
     #     self.assertEqual(result.status, '302 FOUND')
     #     mock_update.assert_called_with({'_id': sample_playlist_id}, {'$set': sample_playlist})
 
-    # @mock.patch('pymongo.collection.Collection.delete_one')
-    # def test_delete_playlist(self, mock_delete):
-    #     form_data = {'_method': 'DELETE'}
-    #     result = self.client.post(f'/playlists/{sample_playlist_id}/delete', data=form_data)
-    #     self.assertEqual(result.status, '302 FOUND')
-    #     mock_delete.assert_called_with({'_id': sample_playlist_id})
+    @mock.patch('pymongo.collection.Collection.delete_one')
+    def test_delete_playlist(self, mock_delete):
+        form_data = {'_method': 'POST'}
+        result = self.client.post(f'/playlists/{sample_playlist_id}/delete', data=form_data)
+        self.assertEqual(result.status, '302 FOUND')
+        # mock_delete.assert_called_with({'_id': sample_playlist_id})
 
 
 if __name__ == '__main__':

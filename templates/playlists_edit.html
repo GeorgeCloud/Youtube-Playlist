@@ -5,7 +5,6 @@
 {% endblock %}
 
 {% block body %}
-  <a href="/">&lt; Home</a>
   <form action="/playlists/{{playlist['_id']}}" method="POST" class="container">
     {% include 'partials/playlists_form.html' %}
   </form>
