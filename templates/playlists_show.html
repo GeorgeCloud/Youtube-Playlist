@@ -1,21 +1,20 @@
 {% extends '_base.html' %}
 
 {% block header %}
-  <title>{{ playlist['title'] }}</title>
+  <title>Playlist - {{ playlist['title'] }}</title>
 {% endblock %}
 
 {% block body %}
   <div class="side-by-side">
     <div>
-      <img src="https://i.ytimg.com/vi/{{playlist['video_ids'][0]}}/sddefault.jpg"
-        alt="Playlist Thumbnail"
-        height="200"
-      width="300">
+      <img src="https://i.ytimg.com/vi/{{playlist['video_ids'][0]}}/sddefault.jpg" alt="Playlist Thumbnail"
+           height="200"
+           width="300">
 
         <div class="rating-stars">
-        {% for rating in range(playlist.rating) %}
-          <img class="star" src="{{ url_for('static', filename='images/star.png') }}" alt="Star Rating">
-        {% endfor %}
+          {% for rating in range(playlist.rating) %}
+            <img class="star" src="{{ url_for('static', filename='images/star.png') }}" alt="Star Rating">
+          {% endfor %}
         </div>
 
       <div>
@@ -28,7 +27,22 @@
 
         <p>Last updated on {{ playlist['last_modified'].strftime("%b %d, %Y") }}</p>
       </div>
+
+      <div>
+        {% include 'partials/comment_form.html' %}
+      </div>
     </div>
+
+    {% if comments.count() %}
+      <div class="border">
+        <h3>Comments<sup>(top 3)</sup></h3>
+
+        {% for comment in comments %}
+          {% include 'partials/comment.html' %}
+        {% endfor %}
+      </div>
+    {% endif %}
+
 
     <div class="above-and-under justify-left">
       {% for video_url in playlist['videos'] %}

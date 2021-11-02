@@ -24,6 +24,11 @@ a {
 form {
 }
 
+fieldset {
+    outline: solid rgb(136, 192, 174) 3px;
+}
+
+
 input {
 }
 
@@ -128,4 +133,24 @@ img {
 
 .video {
     margin-top: 10px;
+}
+
+.border {
+    outline: solid rgb(136, 192, 174) 3px;
+    height: 50vh;
+    width: 30vw;
+    padding: 15px;
+    margin-top: 17%;
+}
+
+.pd-20 {
+    padding: 20px;
+}
+
+.card {
+    margin-top: 15px;
+}
+
+.card-block {
+    padding: 5px;
 }

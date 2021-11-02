@@ -1,0 +1,22 @@
+<form action="/playlists/comment" method="POST">
+  <input type='hidden' value='{{ playlist._id }}' name='playlist_id'>
+
+  <fieldset class="pd-20">
+    <legend>Add a Comment</legend>
+
+    <div class='form-group'>
+      <label>Title</label><br>
+      <input class='form-control' type='text' name='title' placeholder='Title'>
+    </div>
+
+    <!-- DESCRIPTION -->
+    <div class='form-group'>
+      <label>Description</label><br>
+      <textarea class='form-control' name='content' rows='10' placeholder='Your comment...'></textarea>
+    </div>
+  </fieldset>
+
+  <div class='form-group'>
+    <button class='btn btn-primary' type='submit'>Save Comment</button>
+  </div>
+</form>
