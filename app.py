@@ -3,15 +3,16 @@ from flask_paginate import Pagination, get_page_parameter
 from pymongo import MongoClient
 from bson.objectid import ObjectId
 from datetime import datetime
+import os
 
 app = Flask(__name__)
-uri = 'mongodb://localhost/Playlister'
+
+uri = os.environ.get('MONGODB_URI')
 client = MongoClient(uri)
 db = client.get_default_database()
+
 playlists = db.playlists
 comments = db.comments
-
-PLAYLISTS_PER_PAGE = 1
 
 def video_url_creator(id_lst):
     return [f'https://youtube.com/embed/{id}' for id in id_lst]
