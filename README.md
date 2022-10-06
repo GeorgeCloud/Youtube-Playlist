@@ -19,6 +19,10 @@ git clone https://github.com/GeorgeCloud/Youtube-Playlist.git
         ```bash
           echo > "MONGODB_URI=<your_connection_string>" > .env
         ```
+       Now start project:
+       ```bash
+        python app.py
+      ```
      - Docker
         ```bash
           echo "MONGODB_URI='mongodb://mongo:27017/YoutubePlaylist'" > .env
