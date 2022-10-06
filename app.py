@@ -7,7 +7,7 @@ import os
 
 app = Flask(__name__)
 
-uri = os.environ.get('MONGODB_URI')
+uri = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/YoutubePlaylist')
 client = MongoClient(uri)
 db = client.get_default_database()
 
@@ -95,4 +95,4 @@ def comments_new():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=8000, debug=True)
